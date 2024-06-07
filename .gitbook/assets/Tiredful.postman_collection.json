@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "43c72ff3-e492-4321-9ccf-997d19f087a7",
+		"name": "Tiredful",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ccf67e3d-f661-4f4d-890e-a54f0c746b5d",
+						"exec": [
+							"pm.test(\"accesstoken\", function() {",
+							"var jsonData = JSON.parse(responseBody);",
+							"console.log(jsonData);",
+							"pm.globals.set(\"token\", jsonData.access_token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": " 10.0.0.246:8000",
+						"type": "text",
+						"description": "json"
+					},
+					{
+						"key": "User-Agent",
+						"value": " Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:69.0) Gecko/20100101 Firefox/69.0",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": " */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": " en-US,en;q=0.5",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": " gzip, deflate",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": " application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "X-Requested-With",
+						"value": " XMLHttpRequest",
+						"type": "text"
+					},
+					{
+						"key": "Content-Length",
+						"value": " 251",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "DNT",
+						"value": " 1",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": " close",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": " http://10.0.0.246:8000/handle-user-token/",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "username=batman&password=Batman%40123&grant_type=password&client_id=ALGGN0UmsY2Gb9cs3V4CEKMfpBJ2D2XZQXuTFfND&client_secret=mWM7pgvjtUSAtfaK8RXLjzOaLmurBxIWxMdQIQ0t1fSv9orqOnYr5wP5CaFN8DE18NiFiKKalQPu1WecmpbfoZCGYhMqMACz6i2WkWYs5E8gjXxqekjCyPkhBmO5n5EN"
+				},
+				"url": {
+					"raw": "http://{{URL}}/oauth/token/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"oauth",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{URL}}/api/v1/books/978-93-80658-74-2/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books",
+						"978-93-80658-74-2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Exams",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{URL}}/api/v1/exams/MQ==/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"exams",
+						"MQ==",
+						""
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer: {{token}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Articles, Read",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{URL}}/api/v1/articles/2/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article, Approve",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{URL}}/api/v1/approve-article/2/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"approve-article",
+						"2",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trains",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"PNR\": \"9875-4581-234\" \n }"
+				},
+				"url": {
+					"raw": "http://10.0.0.232:8000/api/v1/trains/",
+					"protocol": "http",
+					"host": [
+						"10",
+						"0",
+						"0",
+						"232"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"trains",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activities",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"month\": 1\n    }"
+				},
+				"url": {
+					"raw": "http://{{URL}}/api/v1/activities/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"activities",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "JWT, HS256",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"description": "json",
+						"key": "Accept",
+						"type": "text",
+						"value": " application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"username\": \"batman\",\n      \"password\": \"Batman@123\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{URL}}/api/v1/get-jwt-token-hs256/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"get-jwt-token-hs256",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "JWT, RS256",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": " application/json",
+						"description": "json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"username\": \"batman\",\n      \"password\": \"Batman@123\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{URL}}/api/v1/get-jwt-token-rs256/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"get-jwt-token-rs256",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Advertisements, Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"headline\": \"Test\",\n      \"info\": \"Test\",\n      \"price\":  15.50\n    }"
+				},
+				"url": {
+					"raw": "http://{{URL}}/api/v1/advertisements/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"advertisements",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Advertisements, Read",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{URL}}/api/v1/advertisements/",
+					"protocol": "http",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"advertisements",
+						""
+					],
+					"query": [
+						{
+							"key": "Authori",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1d995525-52c9-439d-a26d-ece973bd419e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "bee85fb1-7f47-479d-adb3-2bfc4c353753",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

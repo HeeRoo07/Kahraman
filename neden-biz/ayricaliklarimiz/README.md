@@ -1,0 +1,7 @@
+# Ayrıcalıklarımız
+
+
+
+```
+// pip install django
+```
